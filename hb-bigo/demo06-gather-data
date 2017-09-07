@@ -1,0 +1,67 @@
+#!/usr/bin/env python
+
+from timing import time_multiple # our code
+from mycsv import dump
+
+dump_only = False
+
+if dump_only:
+    timings = None
+    dump(timings, 'demo06-1.csv')
+
+    import sys
+    sys.exit(0)
+
+# code follows
+
+def coins_order_n(num_coins):
+    results = set()
+    for dimes in range(num_coins+1):
+	pennies = num_coins - dimes
+	results.add(10*dimes + 1*pennies)
+    return results
+
+def coins_recurse(num_coins):
+    '''made terse to emphasize structure.'''
+    def add_coins(r, t, res):
+        if r == 0:
+            res.add(t)
+        else:
+            add_coins(r - 1, t + 10, res) # first recursion
+            add_coins(r - 1, t + 1, res) # second recursion
+        return res
+    return add_coins(r=num_coins, t=0, res=set())
+
+def coins_itertools(coins):
+    # sanity check:
+    if coins < 1:
+        return None
+
+    # the workhorse:
+    import itertools
+
+    # the actual code -- pretty small, right?:
+    return {sum(combo) for combo in
+        itertools.combinations([1,10]*coins,coins)}
+
+for max_n in list(range(11+1)) + [30]:
+    import os
+    dumpfile = 'data/coins-max=%d.csv' % max_n
+    if(os.path.isfile(dumpfile)):
+        print "Skipping %s: file exists. (Remove it to force re-run.)" % dumpfile
+        continue
+
+    timings = {}
+    n_values = list(range(max_n + 1))
+
+    functions = ['coins_order_n']
+    if max_n <= 11:
+        functions.append('coins_recurse')
+    if max_n <= 7:
+        functions.append('coins_itertools')
+
+    for func in functions:
+        timings[func] = time_multiple(func + '(%d)', n_values, [func])
+
+    from mycsv import dump
+    dump(timings, dumpfile, functions)

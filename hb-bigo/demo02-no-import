@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+
+import timeit
+lst = [i for i in range(10)]
+print timeit.timeit('len(lst)')
+
+# Traceback (most recent call last):
+#   File "demo02-len-versus-slice", line 5, in <module>
+#     print timeit.timeit('len(lst)')
+#   File ".../python2.7/timeit.py", line 237, in timeit
+#     return Timer(stmt, setup, timer).timeit(number)
+#   File ".../python2.7/timeit.py", line 202, in timeit
+#     timing = self.inner(it, self.timer)
+#   File "<timeit-src>", line 6, in inner
+# NameError: global name 'lst' is not defined

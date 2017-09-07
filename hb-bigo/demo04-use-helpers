@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+from timing import time_multiple # our code
+
+def foo(n):
+    lst = [i for i in range(n)]
+    return len(lst)
+
+def bar(n):
+    lst = []
+    for i in range(n):
+        lst.append(i)
+
+print time_multiple('foo(%d)', [1, 10], ['foo'])
+# {1: 0.04909396171569824, 10: 0.11186885833740234}
+print time_multiple('bar(%d)', [1, 10], ['bar'])
+# {1: 0.05327892303466797, 10: 0.14912199974060059}

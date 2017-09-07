@@ -1,0 +1,5 @@
+{
+    "coins_order_n": {"d": 0.014, "e":0.07}
+  , "coins_recurse": {"b": 0.009, "e":0.07}
+  , "coins_itertools": {"a": 0.006}
+}

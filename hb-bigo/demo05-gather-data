@@ -1,0 +1,85 @@
+#!/usr/bin/env python
+
+from timing import time_multiple # our code
+from mycsv import dump
+
+dump_only = False
+
+if dump_only:
+    timings = { # example data from a test run:
+        'foo(n)': { 1: 0.05088305473327637, # baseline
+                   10: 0.11431002616882324, # ~  224% bigger
+                  100: 0.4718780517578125}, # ~  927% bigger
+        'bar(n)': { 1: 0.05369091033935547, # baseline
+                   10: 0.15305519104003906, # ~  284% bigger
+                  100: 0.8645610809326172}} # ~ 1610% bigger
+
+    dump(timings, 'data/demo05-1.csv')
+
+    timings3 = { # data from a run with more n values:
+        'foo(n)': {1: 0.029951095581054688,
+                  10: 0.036099910736083984,
+                  20: 0.03823709487915039,
+                  30: 0.045146942138671875,
+                  40: 0.05317497253417969,
+                  50: 0.05647683143615723,
+                 100: 0.07833218574523926,
+                 200: 0.1090250015258789},
+        'bar(n)': {1: 0.052426815032958984,
+                  10: 0.15688705444335938,
+                  20: 0.24352598190307617,
+                  30: 0.3010408878326416,
+                  40: 0.40456295013427734,
+                  50: 0.4995419979095459,
+                 100: 0.8772139549255371,
+                 200: 1.6340620517730713},
+    }
+    dump(timings3, 'data/demo05-2.csv')
+
+    timings3 = { # data from a run with more n values:
+        'foo(n)': {1: 0.029951095581054688,
+                  10: 0.036099910736083984,
+                  20: 0.03823709487915039,
+                  30: 0.045146942138671875,
+                  40: 0.05317497253417969,
+                  50: 0.05647683143615723,
+                 100: 0.07833218574523926,
+                 200: 0.1090250015258789,
+                1000: -1}, # flag lack of data collection
+        'bar(n)': {1: 0.052426815032958984,
+                  10: 0.15688705444335938,
+                  20: 0.24352598190307617,
+                  30: 0.3010408878326416,
+                  40: 0.40456295013427734,
+                  50: 0.4995419979095459,
+                 100: 0.8772139549255371,
+                 200: 1.6340620517730713,
+                1000: -1}, # flag lack of data collection
+    }
+    dump(timings3, 'data/demo05-3.csv')
+
+    import sys
+    sys.exit(0)
+
+# code follows
+
+def foo(n):
+    lst = range(n)
+    return len(lst)
+
+def bar(n):
+    lst = []
+    for i in range(n):
+        lst.append(i)
+
+timings = {}; n_values = [1, 50, 100, 200, 1000]
+
+timings['foo(n)'] = time_multiple('foo(%d)',
+                       n_values, ['foo'])
+timings['bar(n)'] = time_multiple('bar(%d)',
+                       n_values, ['bar'])
+
+print timings
+
+# using our CSV code:
+dump(timings, 'data/demo05-4.csv')

@@ -57,7 +57,9 @@ Feel free to add any one or as many as you like of the following:
 
 ## Tic Tac Toe (goal: to build using React)
 
-An app to do tic-tac-toe in the browser
+An app to do tic-tac-toe in the browser.  Note that there's a tutorial
+for doing exactly this on the react web page:
+<https://facebook.github.io/react/tutorial/tutorial.html>
 
 ### MVP requirements
 

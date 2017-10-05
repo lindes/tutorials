@@ -85,11 +85,15 @@ kinds of events.
 
 *** MVP requirements
 
-- connect with the Eventbrite API
+- connect with the [[http://developer.eventbrite.com][Eventbrite API]]
 - get a list of events
 - filter either or both of:
-  - at the API level
-  - within the app
+  - at the API level (e.g. using categories, keyword search, and/or
+    location searches)
+  - within the app (further filtering based on some criteria you might
+    have that the above doesn't fully accommodate, or if you want to
+    allow the user to dynamically alter their search without making an
+    API call each time.)
 
 ** Display data on meteors (goal: to build using D3)
 

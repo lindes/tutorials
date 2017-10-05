@@ -1,7 +1,7 @@
 #+HTML_HEAD_EXTRA: <link rel="custom stylesheet" type="text/css" href="http://www.daveltd.com/style/org-mode.css" />
 #+TITLE: Project Ideas for Hackbright Build Day
 # is there a way to set this just for markdown, and leave it on for html?
-#+OPTIONS: toc:nil
+#+OPTIONS: toc:2
 
 * Application ideas!
     :PROPERTIES:

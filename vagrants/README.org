@@ -1,0 +1,9 @@
+#+TITLE: Vagrant Configurations for easy project starts
+
+This tree within the [[https://github.com/lindes/tutorials][tutorials]] I'm doing is meant to contain [[https://www.vagrantup.com/][Vagrant]]
+configurations for various sorts of projects might want to do, so that
+one can get a quick start working on the core of a project, without
+having to go through the (sometimes-easy, sometimes-cumbersome)
+installation process.  (For the curious, you can still inspect how
+things are done by looking at the "provisioning" portions of the
+file.)

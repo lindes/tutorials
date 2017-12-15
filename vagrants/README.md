@@ -1,33 +1,4 @@
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#sec-1">1. Introduction</a></li>
-<li><a href="#sec-2">2. Helpers before you get started</a>
-<ul>
-<li><a href="#sec-2-1">2.1. Creating a <code>subl</code> alias:</a></li>
-</ul>
-</li>
-<li><a href="#sec-3">3. Specific Vagrant configurations:</a>
-<ul>
-<li><a href="#sec-3-1">3.1. React</a></li>
-<li><a href="#sec-3-2">3.2. Rails</a></li>
-<li><a href="#sec-3-3">3.3. Flask</a>
-<ul>
-<li><a href="#sec-3-3-1">3.3.1. python 2.7</a></li>
-<li><a href="#sec-3-3-2">3.3.2. python 3</a></li>
-<li><a href="#sec-3-3-3">3.3.3. more to come?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-
-
-
-# Introduction<a id="sec-1" name="sec-1"></a>
+# Introduction
 
 This tree within the [tutorials](https://github.com/lindes/tutorials) I'm doing is meant to contain [Vagrant](https://www.vagrantup.com/)
 configurations for various sorts of projects one might want to do, so
@@ -37,9 +8,9 @@ sometimes-cumbersome) installation process.  (For the curious, you can
 still inspect how things are done by looking at the "provisioning"
 portions of the file.)
 
-# Helpers before you get started<a id="sec-2" name="sec-2"></a>
+# Helpers before you get started
 
-## Creating a `subl` alias:<a id="sec-2-1" name="sec-2-1"></a>
+## Creating a `subl` alias:
 
 If you don't already have a `subl` alias, try the following command:
 
@@ -52,9 +23,9 @@ instead of merely `Sublime Text`. You'll have to see what it is on the
 system you're on; or feel free to ask.  Or just open Sublime first,
 and open the directory you're in from there.
 
-# Specific Vagrant configurations:<a id="sec-3" name="sec-3"></a>
+# Specific Vagrant configurations:
 
-## React<a id="sec-3-1" name="sec-3-1"></a>
+## React
 
 Using the Vagrant file in the react/ subdirectory, use the following
 steps.  Steps 1 and 2 are optional, but recommended:
@@ -83,18 +54,18 @@ that on the page are all you'll need to do.
 9.  Proceed from there!  (You can switch back and forth to Sublime to
 edit files, as desired.)  Happy hacking!
 
-## Rails<a id="sec-3-2" name="sec-3-2"></a>
+## Rails
 
 [Instructions and Vagrantfile yet to be written.]
 
-## Flask<a id="sec-3-3" name="sec-3-3"></a>
+## Flask
 
-### python 2.7<a id="sec-3-3-1" name="sec-3-3-1"></a>
-
-[Instructions and Vagrantfile yet to be written.]
-
-### python 3<a id="sec-3-3-2" name="sec-3-3-2"></a>
+### python 2.7
 
 [Instructions and Vagrantfile yet to be written.]
 
-### more to come?<a id="sec-3-3-3" name="sec-3-3-3"></a>
+### python 3
+
+[Instructions and Vagrantfile yet to be written.]
+
+### more to come?

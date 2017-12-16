@@ -30,6 +30,10 @@ and open the directory you're in from there.
 Using the Vagrant file in the react/ subdirectory, use the following
 steps.  Steps 1 and 2 are optional, but recommended:
 
+### Full version:
+
+(See below for more-or-less copy/paste-able version.)
+
 1.  Copy the Vagrantfile into a directory (possibly creating it first)
 where you intend to do the work of this project.
 2.  If you haven't already, run `git init` there.  And `git add` the
@@ -54,6 +58,25 @@ that on the page are all you'll need to do.
 9.  Proceed from there!  (You can switch back and forth to Sublime to
 edit files, as desired.)  Happy hacking!
 
+### TL;DR / copy-paste-friendly version:
+
+(Note: It is recommended that if you actually copy/paste this, you do
+so one line at a time.)
+
+cd ~/src # or wherever you want to start
+mkdir some_new_project # change this to whatever makes sense for you
+git init . # creating a new git repo for this
+curl -O https://raw.githubusercontent.com/lindes/tutorials/master/vagrants/react/Vagrantfile
+git add Vagrantfile
+git commit -m 'Vagrantfile from github/lindes/tutorials/'
+subl . # then come back to the shell; see full doc if you don't have subl alias
+vagrant up # and wait a while, maybe reading Vagrantfile to see what it's up to while you do
+vagrant ssh
+cd src
+# then follow directions linked above, starting with:
+npm install -g create-react-app
+create-react-app my-app
+
 ## Rails
 
 [Instructions and Vagrantfile yet to be written.]
@@ -66,6 +89,10 @@ edit files, as desired.)  Happy hacking!
 
 ### python 3
 
-[Instructions and Vagrantfile yet to be written.]
+There's now a `Vagrantfile` (and a very simple `server.py`) in
+[flask-py3](./flask-py3).  Instructions are similar to the react set, just skip the
+npm stuff.
 
 ### more to come?
+
+What other environments would folks like here?

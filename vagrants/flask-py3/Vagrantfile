@@ -1,0 +1,85 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# This Vagrantfile has been written with the intention of bringing up
+# a virtual machine with a simple python3 flask environment
+# pre-installed, so someone can jump directly to playing with flask
+# under python3 (or just python3 itself).
+
+# Target audience is recent graduates of Hackbright Academy, though
+# anyone who finds it useful is welcome to use it; please consider it
+# to be under the GPLv3 license, or ask me if you'd like other
+# licensing (BSD, or whatever).
+
+
+
+# Comments that follow are about why I've chosen particular values for
+# parameters -- for information on what they actually do, check out
+# the Vagrant docs at vagrantup.com or try getting a fresh Vagrantfile
+# with this command:
+#
+#    vagrant init ubuntu/xenial64
+
+Vagrant.configure("2") do |config|
+  # as of the time of putting this here, I believe xenial to be the most
+  # recent available ubuntu option:
+  config.vm.box = "ubuntu/xenial64"
+
+  # We're putting flask on port 5000 -- however, we also ask vagrant
+  # to automatically use a different port if port 5000 is in use when
+  # the VM comes up.  Watch for messaging about that in the output
+  # from `vagrant up`.
+  config.vm.network "forwarded_port", guest: 5000, host: 5000, auto_correct: true
+
+  # This puts the current directory (where this Vagrantfile is) from
+  # the "host" computer (the Mac or Windows (or Linux) box you're
+  # physically sitting in front of) under what's at ~/src on the
+  # "guest" -- i.e. the virtual machine, i.e. once you're ssh'd into
+  # vagrant.  Anything you put in ~/src/ within the guest will show up
+  # in the current directory on the host, and vice versa.
+  config.vm.synced_folder ".", "/home/ubuntu/src"
+
+  # because I'm tired of getting errors that say:
+  # "mesg: ttyname failed: Inappropriate ioctl for device"
+  # See https://superuser.com/a/1277604/57367 for more info.
+  config.ssh.shell="bash"
+
+  # some provisioning to install the software we'll be using:
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get upgrade
+    # feel free to add more software, e.g. postgresql or whatever
+    apt-get install -y python3-pip
+    pip3 install --upgrade pip
+    pip install flask
+    echo "export FLASK_APP=/home/ubuntu/src/server.py" >> ~ubuntu/.profile
+    # if you need to run a seed.py or something, this might be a good
+    # place to add that.
+  SHELL
+
+  # The following /could/ be shortened to basically just the sudo
+  # command, but I find it nice to be able to report status, and type
+  # 'vagrant up' potentially-repeatedly without worrying that it'll
+  # kill the flask server, but also that it'll try to start flask if
+  # it it's not running:
+  config.vm.provision "shell", run: "always", inline: <<-SHELL
+    # look for flask listening:
+    if lsof -i | grep flask
+    then
+      # note: this will also print out the lsof info with the (guest) port number.
+      echo "Looks like flask is already running!  Woohoo!"
+    else
+      # start a new flask:
+      echo "Flask doesn't seem to have been running; we'll try to start one."
+      (sudo -u ubuntu -i -n flask run -h 0 -p 5000 2>&1 | logger -plocal0.info -t flask.run) &
+      sleep 1 # this *seems* to be all it takes, but maybe not always.
+      if lsof -i | grep flask
+      then
+	echo "Sweet, looks like it's up now. :)"
+      else
+	echo "Hmm... may not have worked; might need to investigate?" >&2
+      fi
+      # don't check it, just continue
+    fi
+  SHELL
+end

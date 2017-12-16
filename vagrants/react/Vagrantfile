@@ -61,4 +61,10 @@ Vagrant.configure("2") do |config|
     chgrp sudo /usr/local/*/
     chmod g+w /usr/local/*/
   SHELL
+
+  # TODO: something to `npm start`?  Except I think I'm leaving this
+  # where someone needs to create their own react app, so there's
+  # nothing to start immediately.  Still, might be nice to have it
+  # there for when they've built an app -- even if it's commented out
+  # as an example.
 end

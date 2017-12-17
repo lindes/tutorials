@@ -1,7 +1,23 @@
 #+HTML_HEAD_EXTRA: <link rel="custom stylesheet" type="text/css" href="http://www.daveltd.com/style/org-mode.css" />
-#+TITLE: Project Ideas for Hackbright Build Day
-# is there a way to set this just for markdown, and leave it on for html?
-#+OPTIONS: toc:2
+#+TITLE: Project Ideas for Hackbright Build Days
+#+OPTIONS: toc:3 html-postamble:nil style-include-scripts:nil num:nil
+
+# Some inline CSS; probably ought to put this externally, but it seems
+# pretty specific to this file.  Using a bunch of lines because I'm
+# not sure how to do a block-mode thing for HTML_HEAD_EXTRA
+
+#+HTML_HEAD_EXTRA: <style>h2 { border-top: 1px solid black; } </style>
+#+HTML_HEAD_EXTRA: <style>h2 { border-bottom: 1px solid black; } </style>
+#+HTML_HEAD_EXTRA: <style>.outline-4 { border-left: 10px solid #8ff; } </style>
+#+HTML_HEAD_EXTRA: <style>.outline-4 { border-bottom: 2px solid #8ff; } </style>
+#+HTML_HEAD_EXTRA: <style>.outline-4 { padding-left: 10px; } </style>
+#+HTML_HEAD_EXTRA: <style>.outline-4 { margin-bottom: 3em; } </style>
+#+HTML_HEAD_EXTRA: <style>h4 { background: #cff; } </style>
+#+HTML_HEAD_EXTRA: <style>h4 { margin-left: -10px; padding: 0.5em; } </style>
+#+HTML_HEAD_EXTRA: <style>h5 { background: #fcf; margin: 0 15% 0 15%; } </style>
+#+HTML_HEAD_EXTRA: <style>h3, h4, h5 { font-size: 110%; text-align: center; } </style>
+
+[Note: this document can be found online at [[http://bit.ly/hb-buildday-ideas][bit.ly/hb-buildday-ideas]].]
 
 * Application ideas!
     :PROPERTIES:
@@ -16,44 +32,108 @@ work on what you start here today, or start another one; it's up to
 you. :) And of course, you can also work on whatever projects you
 already have ideas for, even if you've already started.  It's a day to
 build, whatever and however you like, with the support of peers and
-someone to ask questions of.
+experienced supporters to ask questions of.
 
-If you do finish an MVP and/or extra components today, /great/!  AND
-also know that it's totally fine to need more time!  The few hours we
-have set aside today are not a lot of time -- especially if you're
-trying for all the components in an app!
+If you do finish an MVP and/or extra components today, /great/!  AND,
+also know that it's totally fine to need more time.  Experience shows
+that most folks do, so you won't be alone -- the few hours we have set
+aside today are not a lot of time, especially if you're trying for
+bonus components in the app you choose to build.
 
 Also, for the purposes of today's exercise, having this be a
-multi-user app is considered a bonus, rather than part of the MVP.
-The idea is to have you build something that does something in a way
-that can be used by /someone/.  Without supporting multiple accounts,
-most apps won't be "viable" in a release-it-to-the-world way, but they
-sure will be for the purposes of a learning exercise.  That said, it's
-recommended that you keep in mind what would have to be different to
-make it multi-user if you don't start out that way.
+multi-user app (except in the case of the chat app) is considered a
+bonus, rather than part of the MVP.  The idea is to have you build
+something that does something in a way that can be used by /someone/.
+Without supporting multiple accounts, most apps won't be "viable" in a
+release-it-to-the-world way, but they sure will be for the purposes of
+a learning exercise.  That said, it's recommended that you keep in
+mind what would have to be different to make it multi-user if you
+don't start out that way.  That way, it'll be easier to transition
+later if/when you decide to.  Plus it's just a good thinking
+exercise. 😊
 
-Without further ado, here are a few app ideas:
+Without further ado, here are a few app ideas, broken into categories:
 
-** To-do list app
+** JavaScript-oriented projects:
+
+*** Tic Tac Toe (goal: build using React)
+
+An app to do [[https://en.wikipedia.org/wiki/Tic-tac-toe][tic-tac-toe]] in the browser.  Note that there's a tutorial
+for doing exactly this on the react web page:
+[[https://facebook.github.io/react/tutorial/tutorial.html][facebook.github.io/react/tutorial/tutorial.html]]
+
+Also, you may find this [[https://github.com/lindes/tutorials/tree/master/vagrants#react][Vagrant mini-guide written specifically for
+this project]] (or even just the accompanying [[https://raw.githubusercontent.com/lindes/tutorials/master/vagrants/react/Vagrantfile][Vagrantfile]]) useful to get
+the ball rolling.
+
+**** MVP requirements
+
+     - Display a 3x3 grid, with the characteristic "#" pattern.
+     - when clicking on a square in the grid, change it to the current
+       player indicator -- either an X or an O.
+     - toggle between X and O and the next play.
+
+**** Bonus functionalities
+
+     - have a server backend that allows two people to play against
+       each other, one getting X, and one getting O.  Keep track of
+       turns.  This could involve just sharing a special URL for the
+       game ID, or:
+     - allow some form of login (could be ephemeral, could be
+       long-lasting), and for people to start games and wait for
+       another player to join them.
+     - keep track of cumulative scores for a player (wins, losses,
+       draws)
+
+*** Display data on meteors (goal: build using D3)
+
+Get data from an external source about meteors, and display a visual
+representation of them using D3
+
+**** MVP requirements
+     + get the data [[https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh][from NASA]] (clicking "Export" on the top-right and
+       choosing "CSV" is recommended; you can then decide a way to
+       convert and/or import the data so the app can use it.)
+     + Make the data available -- two main options here:
+       - on the backend -- create a model and import into a database
+       - on the frontend -- convert the data into JSON or similar, so
+         you can fetch it
+     + build some sort of visualization based on this data.  Ideas for
+       starting points on this:
+       - build a scatter-plot of mass over time
+       - plot the landings on a map.  ([[https://github.com/d3/d3-geo][d3-geo]] may be useful here.)
+
+** Backend-oriented apps
+
+For these, you could either continue to use Flask as a starting point,
+or branch out into trying [[https://www.djangoproject.com/][Django]] (a popular Python-based framework) or
+[[http://rubyonrails.org/][Rails]] (another popular framework, this one [[https://www.ruby-lang.org/][Ruby]]-based, thus exposing
+you to not only a new framework, but a whole new programming
+language).
+
+*** To-do list app
 
 An app for keeping track of things one needs to do.
 
-*** MVP requirements
+**** MVP requirements
 
-- Allow the entry of new items that might need doing.
-- Store such items in a database, so they can be retrieved later.
-- Present a list of stored items.
-- Have a way to mark an item completed.
-- Alter the display of or remove an item which is marked completed.
+     + Allow the entry of new items that might need doing.
+     + Store such items in a database, so they can be retrieved later.
+     + Present a list of stored items.
+     + Have a way to mark an item completed.
+     + When an item is marked completed, either alter the way it's
+       displayed (e.g. +strikethrough+), or simply remove it.
 
-*** Bonus functionalities
+**** Bonus functionalities
 
 Feel free to add any one or as many as you like of the following:
 
 - Provide a way to delete an item, instead of just completing it.
 - Allow a user to edit the description of an item.
 - Have accounts and login/logout, with items stored privately for each user.
-- slick AJAX-y interface, where items get +struck through+ and perhaps gradually fade from screen.
+- slick AJAX-y interface, where items perhaps gradually fade from
+  screen, or get moved to a different part of the page showing
+  recently-completed items, or such.
 - an "undo" for completions or deletions.
 - due-dates for items
 - contexts for items (e.g. one item is something to buy at a grocery
@@ -61,49 +141,80 @@ Feel free to add any one or as many as you like of the following:
   item is a phone call you need to make; and another is something you
   have to do at home.)
 
-** Tic Tac Toe (goal: to build using React)
-
-An app to do tic-tac-toe in the browser.  Note that there's a tutorial
-for doing exactly this on the react web page:
-https://facebook.github.io/react/tutorial/tutorial.html
-
-*** MVP requirements
-
-- Display a 3x3 grid
-- when clicking on a square in the grid, change it to an X or an O
-- toggle between X and O
-
-*** Bonus functionalities
-
-- have a server backend that allows two people to play against each
-  other, one getting X, and one getting O.  Keep track of turns.
-
-** Filter for certain events, such as Career Fairs, using the Eventbrite API (goal: to build using APIs)
+*** Search for events (such as Career Fairs) on Eventbrite (goal: build using Eventbrite API)
 
 Something to look through Eventbrite events, and search for certain
 kinds of events.
 
-*** MVP requirements
+**** MVP requirements
 
-- connect with the [[http://developer.eventbrite.com][Eventbrite API]]
-- get a list of events
-- filter either or both of:
-  - at the API level (e.g. using categories, keyword search, and/or
-    location searches)
-  - within the app (further filtering based on some criteria you might
-    have that the above doesn't fully accommodate, or if you want to
-    allow the user to dynamically alter their search without making an
-    API call each time.)
+     + connect with the [[http://developer.eventbrite.com][Eventbrite API]]
+     + get a list of events
+     + filter either or both of:
+       - at the API level (e.g. using categories, keyword search, and/or
+         location searches)
+       - within the app you're building (further filtering based on
+         some criteria you might have that the API doesn't fully
+         accommodate, or if you want to allow the user to dynamically
+         alter their search without making an API call each time.)
 
-** Display data on meteors (goal: to build using D3)
+**** Bonus requirements
 
-Get data from an external source about meteors, and display a visual
-representation of them using D3
+     + Allow a user to either select or dismiss events -- selected
+       events showing up in a list of things they want to go to,
+       dismissed events disappearing from the display, even if a new
+       search is done.
 
-*** MVP requirements
+*** Chat application between people
 
-- get the data [I think I have a link somewhere; I'll try to get it if
-  you choose this project.]
+Allow people to chat via their browsers.
 
-** Chat application between 2 people
-** Chatbot
+**** MVP requirements
+
+     + Allow at least two people to connect to the website, with at
+       least a minimal login (could just be ephemeral -- e.g. "Enter
+       your name").
+     + Have a way for two users to connect to each other (could be
+       listing online users, could be a URL to share offline, etc.)
+     + Once chatting, send messages from one user to the other in a
+       timely (say, less than a second) manner, in both directions.
+
+**** Bonus functionalities
+
+     + Make timestamps available, and/or shown by default in a
+       "non-spammy" sort of way.
+     + OAuth-based login against one or more existing providers
+       (Google, twitter, facebook, etc.)
+     + Store chat history, allow displaying and/or searching of it.
+
+*** Chatbot
+
+Create a "[[https://en.wikipedia.org/wiki/Internet_bot][bot]]" that will connect to an existing chat service
+(e.g. using the [[https://api.slack.com/][Slack API]]), and interact with messages on that
+channel.
+
+**** MVP requirements
+
+     + Connect to an appropriate chat service
+     + Respond to "direct messages" / "mentions" in some manner
+     + Have some set of "commands" that, if presented after the
+       mention, will cause the bot to insert certain (possibly
+       dynamic) responses.
+
+**** Bonus functionalities
+
+     + Have a set of things that the bot will look for in messages
+       that /do not/ mention the bot, to which the bot will respond
+       anyway.  For example:
+       - If it sees the word "weather" in a message that ends with a
+         question mark, it looks up the current weather and reports
+         that to the channel.  Double-bonus: if a location is also
+         mentioned, it looks up weather in that particular place.
+       - If it sees an expression of dismay ("this sucks", ":(",
+         etc.), it responds with an affirmation and/or validation of
+         some kind.
+
+* Useful resources
+
+I've created some resources for using [[https://vagrantup.com/][Vagrant]] to help get projects
+started more easily.

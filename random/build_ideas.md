@@ -74,7 +74,9 @@ representation of them using D3
 
 -   get the data [from NASA](https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh) (clicking "Export" on the top-right and
 choosing "CSV" is recommended; you can then decide a way to
-convert and/or import the data so the app can use it.)
+convert and/or import the data so the app can use it.  Bonus
+points for finding the way to get the JSON data, and especially
+the JSON data that's more than 1000 items. 😉)
 -   Make the data available &#x2013; two main options here:
 -   on the backend &#x2013; create a model and import into a database
 -   on the frontend &#x2013; convert the data into JSON or similar, so

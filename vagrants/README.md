@@ -63,19 +63,19 @@ edit files, as desired.)  Happy hacking!
 (Note: It is recommended that if you actually copy/paste this, you do
 so one line at a time.)
 
-cd ~/src # or wherever you want to start
-mkdir some_new_project # change this to whatever makes sense for you
-git init . # creating a new git repo for this
-curl -O https://raw.githubusercontent.com/lindes/tutorials/master/vagrants/react/Vagrantfile
-git add Vagrantfile
-git commit -m 'Vagrantfile from github/lindes/tutorials/'
-subl . # then come back to the shell; see full doc if you don't have subl alias
-vagrant up # and wait a while, maybe reading Vagrantfile to see what it's up to while you do
-vagrant ssh
-cd src
-# then follow directions linked above, starting with:
-npm install -g create-react-app
-create-react-app my-app
+    cd ~/src # or wherever you want to start
+    mkdir some_new_project # change this to whatever makes sense for you
+    git init . # creating a new git repo for this
+    curl -O https://raw.githubusercontent.com/lindes/tutorials/master/vagrants/react/Vagrantfile
+    git add Vagrantfile
+    git commit -m 'Vagrantfile from github/lindes/tutorials/'
+    subl . # then come back to the shell; see full doc if you don't have subl alias
+    vagrant up # and wait a while, maybe reading Vagrantfile to see what it's up to while you do
+    vagrant ssh
+    cd src
+    # then follow directions linked above, starting with:
+    npm install -g create-react-app
+    create-react-app my-app
 
 ## Rails
 

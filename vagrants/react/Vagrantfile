@@ -55,6 +55,7 @@ Vagrant.configure("2") do |config|
   # some provissioning to install node and npm, set up a shell prompt, and such:
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
+    apt-get -y upgrade
     apt-get install -y npm
 
     # make us able to do npm stuff as non-root:

@@ -102,6 +102,6 @@ There's now a ~Vagrantfile~ (and a very simple ~server.py~) in
 [[./flask-py3][flask-py3]].  Instructions are similar to the react set, just skip the
 npm stuff.
 
-*** more to come?
+** more to come?
 
 What other environments would folks like here?

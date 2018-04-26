@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
   # "guest" -- i.e. the virtual machine, i.e. once you're ssh'd into
   # vagrant.  Anything you put in ~/src/ within the guest will show up
   # in the current directory on the host, and vice versa.
-  config.vm.synced_folder ".", "/home/ubuntu/src"
+  config.vm.synced_folder ".", "/home/vagrant/src"
 
   # because I'm tired of getting errors that say:
   # "mesg: ttyname failed: Inappropriate ioctl for device"
@@ -57,13 +57,17 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get -y upgrade
+
     # feel free to add more software, e.g. postgresql or whatever
     apt-get install -y python#{p3}-pip
+
     pip#{p3} install --upgrade pip
+
     pip install flask
-    echo "export FLASK_APP=/home/ubuntu/src/server.py" >> ~ubuntu/.profile
-    echo "export FLASK_DEBUG=1" >> ~ubuntu/.profile
-    echo "export VAGRANT_DIR='#{Dir.pwd.sub(Dir.home, "~")}'" >> ~ubuntu/.profile
+
+    echo "export FLASK_APP=/home/vagrant/src/server.py" >> ~vagrant/.profile
+    echo "export FLASK_DEBUG=1" >> ~vagrant/.profile
+    echo "export VAGRANT_DIR='#{Dir.pwd.sub(Dir.home, "~")}'" >> ~vagrant/.profile
     # if you need to run a seed.py or something, this might be a good
     # place to add that.
   SHELL
@@ -82,7 +86,7 @@ Vagrant.configure("2") do |config|
     else
       # start a new flask:
       echo "Flask doesn't seem to have been running; we'll try to start one."
-      (sudo -u ubuntu -i -n flask run -h 0 -p 5000 2>&1 | logger -plocal0.info -t flask.run) &
+      (sudo -u vagrant -i -n flask run -h 0 -p 5000 2>&1 | logger -plocal0.info -t flask.run) &
       sleep 1 # this *seems* to be all it takes, but maybe not always.
       if lsof -i | grep flask
       then

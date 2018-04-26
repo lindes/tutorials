@@ -1,3 +1,4 @@
+# -*- mode: org -*-
 #+TITLE: Vagrant Configurations for easy project starts
 #+OPTIONS: footer:nil
 #+OPTIONS: html-postamble:nil style-include-scripts:nil
@@ -18,9 +19,8 @@ portions of the file.)
 
 If you don't already have a ~subl~ alias, try the following command:
 
-
 #+BEGIN_SRC shell
-ln -si "$(/bin/ls -1 /Applications/Sublime\ Text*.app/Contents/SharedSupport/bin/subl | tail -1)" /usr/local/bin
+  ln -si "$(/bin/ls -1 /Applications/Sublime\ Text*.app/Contents/SharedSupport/bin/subl | tail -1)" /usr/local/bin
 #+END_SRC
 
 Hopefully that will do the trick; if it does not, there's more
@@ -67,24 +67,24 @@ steps.  Steps 1 and 2 are optional, but recommended:
 
 *** TL;DR / copy-paste-friendly version:
 
-(Note: It is recommended that if you actually copy/paste this, you do
-so one line at a time.)
+    (Note: It is recommended that if you actually copy/paste this, you do
+    so one line at a time.)
 
-#+BEGIN_EXAMPLE
-    cd ~/src # or wherever you want to start
-    mkdir some_new_project # change this to whatever makes sense for you
-    git init . # creating a new git repo for this
-    curl -O https://raw.githubusercontent.com/lindes/tutorials/master/vagrants/react/Vagrantfile
-    git add Vagrantfile
-    git commit -m 'Vagrantfile from github/lindes/tutorials/'
-    subl . # then come back to the shell; see full doc if you don't have subl alias
-    vagrant up # and wait a while, maybe reading Vagrantfile to see what it's up to while you do
-    vagrant ssh
-    cd src
-    # then follow directions linked above, starting with:
-    npm install -g create-react-app
-    create-react-app my-app
-#+END_EXAMPLE
+    #+BEGIN_SRC shell
+      cd ~/src               # or wherever you want to start
+      mkdir some_new_project # change this to whatever makes sense for you
+      git init .             # creating a new git repo for this
+      curl -O https://raw.githubusercontent.com/lindes/tutorials/master/vagrants/react/Vagrantfile
+      git add Vagrantfile
+      git commit -m 'Vagrantfile from github/lindes/tutorials/'
+      subl .                 # then come back to the shell; see full doc if you don't have subl alias
+      vagrant up             # and wait a while, maybe reading Vagrantfile to see what it's up to while you do
+      vagrant ssh
+      cd src
+      # then follow directions linked above, starting with:
+      npm install -g create-react-app
+      create-react-app my-app
+    #+END_SRC
 
 ** Rails
 

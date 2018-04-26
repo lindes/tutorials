@@ -2,14 +2,20 @@
 # vi: set ft=ruby :
 
 # This Vagrantfile has been written with the intention of bringing up
-# a virtual machine with a simple python3 flask environment
+# a virtual machine with a simple python flask environment
 # pre-installed, so someone can jump directly to playing with flask
-# under python3 (or just python3 itself).
+# under python (or just python itself).
+
+# We can use either python 2 or python 3.  If you want python 3, set
+# want_python_3 to true instead of false.  Note that you'll also have to
+# do a "vagrant destroy" and another "vagrant up" to get the change to
+# take hold.
+want_python_3=false
 
 # Target audience is recent graduates of Hackbright Academy, though
-# anyone who finds it useful is welcome to use it; please consider it
-# to be under the GPLv3 license, or ask me if you'd like other
-# licensing (BSD, or whatever).
+# anyone who finds it useful is welcome to use it; please consider it to
+# be under the GPLv3 license, or ask me if you'd like other licensing
+# (BSD, or whatever).
 
 
 
@@ -26,9 +32,11 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
 
   # We're putting flask on port 5000 -- however, we also ask vagrant
-  # to automatically use a different port if port 5000 is in use when
-  # the VM comes up.  Watch for messaging about that in the output
-  # from `vagrant up`.
+  # to automatically use a different port if port 5000 is in use on
+  # the host machine (that is, a Mac or Windows box, and this might
+  # happen if you have another Vagrant instance running, or are
+  # running a flask server on the host machine) when the VM comes up.
+  # Watch for messaging about that in the output from `vagrant up`.
   config.vm.network "forwarded_port", guest: 5000, host: 5000, auto_correct: true
 
   # This puts the current directory (where this Vagrantfile is) from
@@ -45,14 +53,17 @@ Vagrant.configure("2") do |config|
   config.ssh.shell="bash"
 
   # some provisioning to install the software we'll be using:
+  p3 = want_python_3 ? '3' : ''
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get -y upgrade
     # feel free to add more software, e.g. postgresql or whatever
-    apt-get install -y python3-pip
-    pip3 install --upgrade pip
+    apt-get install -y python#{p3}-pip
+    pip#{p3} install --upgrade pip
     pip install flask
     echo "export FLASK_APP=/home/ubuntu/src/server.py" >> ~ubuntu/.profile
+    echo "export FLASK_DEBUG=1" >> ~ubuntu/.profile
+    echo "export VAGRANT_DIR='#{Dir.pwd.sub(Dir.home, "~")}'" >> ~ubuntu/.profile
     # if you need to run a seed.py or something, this might be a good
     # place to add that.
   SHELL

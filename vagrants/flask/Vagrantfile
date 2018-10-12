@@ -29,7 +29,7 @@ want_python_3=false
 Vagrant.configure("2") do |config|
   # as of the time of putting this here, I believe xenial to be the most
   # recent available ubuntu option:
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = want_python_3 ? "ubuntu/xenial64" : "ubuntu/trusty64"
 
   # We're putting flask on port 5000 -- however, we also ask vagrant
   # to automatically use a different port if port 5000 is in use on
@@ -68,6 +68,12 @@ Vagrant.configure("2") do |config|
     echo "export FLASK_APP=/home/vagrant/src/server.py" >> ~vagrant/.profile
     echo "export FLASK_DEBUG=1" >> ~vagrant/.profile
     echo "export VAGRANT_DIR='#{Dir.pwd.sub(Dir.home, "~")}'" >> ~vagrant/.profile
+
+    # TODO: virtualenv???  (I'm thinking I'll skip this, but it could be interesting to do.)
+    # TODO: check for requirements.txt and run pip install with it if we have one.
+
+    # QUESTION: do the above as root, or vagrant?
+
     # if you need to run a seed.py or something, this might be a good
     # place to add that.
   SHELL

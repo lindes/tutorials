@@ -92,15 +92,13 @@ steps.  Steps 1 and 2 are optional, but recommended:
 
 ** Flask
 
-*** python 2.7
-
-[Instructions and Vagrantfile yet to be written.]
-
-*** python 3
-
-There's now a ~Vagrantfile~ (and a very simple ~server.py~) in
-[[./flask-py3][flask-py3]].  Instructions are similar to the react set, just skip the
-npm stuff.
+There's now a ~Vagrantfile~ (and a very simple ~server.py~) in the
+[[./flask][flask]] subdirectory, which can set up a simple flask server with either
+Python 2 or Python 3.  (Set the ~want_python_3~ variable near the top
+of the Vagrantfile to true if you want Python 3, otherwise it will use
+Python 2.)  If you want to have an environment similar to what you had
+for the Hackbright curriculum, you'll also want to install postgresql;
+see the comments in the "[[https://www.vagrantup.com/docs/provisioning/][provisioning]]" section.
 
 ** more to come?
 
